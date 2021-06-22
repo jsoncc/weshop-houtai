@@ -1,0 +1,87 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.business.OilDao">
+    <select id="queryOils" resultType="map">
+        select *
+        from b_oil;
+    </select>
+
+    <!--分页查询-->
+    <select id="queryOil" parameterType="map" resultType="map">
+        select o.`id`,
+        o.`oil_name`,
+        o.`address`,
+        o.`longitude`,
+        o.`latitude`,
+        o.`discount`,
+        o.`explains`,
+        o.`adddate`,
+        o.`status`
+        from b_oil o
+        <where>
+            o.isdel = 0
+            <if test="oil_name != null and oil_name !='' ">
+                and o.oil_name like concat ('%',#{oil_name},'%')
+            </if>
+        </where>
+    </select>
+    <!--查询总记录数-->
+    <select id="queryOilCount" parameterType="map" resultType="int">
+        select count(1)
+        from b_oil o
+        <where>
+            o.isdel = 0
+            <if test="oil_name != null and oil_name !='' ">
+                and o.oil_name like concat ('%',#{oil_name},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--保存油站-->
+    <insert id="saveOil" parameterType="map">
+        insert into b_oil(id, oil_name, address, longitude, latitude, discount, explains, adddate)
+        values (uuid(), #{oil_name}, #{address}, #{longitude}, #{latitude}, #{discount}, #{explains}, now())
+    </insert>
+
+    <!-- 修改油站信息 -->
+    <!--    <update id="updateOil" parameterType="map">-->
+    <!--        update b_oil-->
+    <!--        set oil_name=#{oil_name},-->
+    <!--            address=#{address},-->
+    <!--            longitude=#{longitude},-->
+    <!--            latitude=#{latitude},-->
+    <!--            discount=#{discount},-->
+    <!--            explains=#{explains}-->
+    <!--        where id = #{id}-->
+    <!--    </update>-->
+
+    <update id = "updateOil" parameterType = "map">
+        update b_oil
+        <trim prefix = "set" suffixOverrides = ",">
+            <if test = "oil_name != null and oil_name != '' ">
+                oil_name = #{oil_name},
+            </if>
+            <if test = "address != null">
+                address =# {address},
+            </if>
+            <if test = "longitude != null">
+                longitude = #{longitude},
+            </if>
+            <if test = "latitude != null">
+                latitude = #{latitude},
+            </if>
+            <if test="discount != null">
+                discount = #{discount},
+            </if>
+            <if test="explains != null">
+                explains = #{explains},
+            </if>
+            <if test="isdel != null and isdel != '' ">
+                isdel = #{isdel}
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>
