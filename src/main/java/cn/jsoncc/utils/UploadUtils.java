@@ -35,10 +35,11 @@ public class UploadUtils {
         int pos = filename.lastIndexOf('.');//找到.的位置
         String ext = filename.substring(pos);//文件后缀ext
         //将上传的文件生成新的文件名
-        String tmpName = UUID.randomUUID().toString() ;
+        String tmpName = UUID.randomUUID().toString();
         String newFileName = tmpName + ext;
 
         //获取服务器的跟路径 ？？？服务器是哪个服务器
+        //是这个后台项目的服务器
         String root = request.getServletContext().getRealPath("/");
 
         // 二：
