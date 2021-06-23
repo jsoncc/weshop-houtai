@@ -42,7 +42,7 @@
     <!--保存油站-->
     <insert id="saveOil" parameterType="map">
         insert into b_oil(id, oil_name, address, longitude, latitude, discount, explains, adddate)
-        values (uuid(), #{oil_name}, #{address}, #{longitude}, #{latitude}, #{discount}, #{explains}, now())
+        values (#{id}, #{oil_name}, #{address}, #{longitude}, #{latitude}, #{discount}, #{explains}, now())
     </insert>
 
     <!-- 修改油站信息 -->

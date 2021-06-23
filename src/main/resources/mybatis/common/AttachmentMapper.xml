@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.business.AttachmentDao">
+    <!--批量插入附件-->
+    <insert id="saveBatchAttachment" parameterType="map">
+        insert into b_attachment (
+        id,
+        name,
+        attType,
+        attUrl,
+        attMiniUrl,
+        uploadTime,
+        isdefault,
+        businessId,
+        businessType
+        )
+        values
+        <foreach collection="pics" item="pic" separator=",">
+            (uuid(),#{pic.name},#{pic.attType},#{pic.attUrl},#{pic.attMiniUrl},now(),0,#{id},1)
+        </foreach>
+    </insert>
+
+
+</mapper>

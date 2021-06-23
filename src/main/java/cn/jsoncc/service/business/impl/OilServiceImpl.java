@@ -2,6 +2,7 @@ package cn.jsoncc.service.business.impl;
 
 import cn.jsoncc.common.bean.PageBean;
 import cn.jsoncc.common.bean.PageMap;
+import cn.jsoncc.dao.business.AttachmentDao;
 import cn.jsoncc.dao.business.OilDao;
 import cn.jsoncc.service.business.OilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Author: JsonCC
@@ -21,6 +23,9 @@ public class OilServiceImpl implements OilService {
     @Autowired
     private OilDao oilDao;
 
+    @Autowired
+    private AttachmentDao attachmentDao;
+
     @Override
     public PageBean queryOil(Map map) {
         PageMap pageMap = new PageMap(map);
@@ -31,14 +36,22 @@ public class OilServiceImpl implements OilService {
 
     @Override
     public int saveOil(Map map) {
-        return oilDao.saveOil(map);
+        //生成油站id
+        String oid = UUID.randomUUID().toString();
+        map.put("id", oid);
+        //保存油站
+        int rs = oilDao.saveOil(map);
+
+        //批量保存附件
+        rs = attachmentDao.saveBatchAttachment(map);
+
+        return rs;
     }
 
     @Override
     public int updateOil(Map map) {
         return oilDao.updateOil(map);
     }
-
 
 
 }
