@@ -14,7 +14,7 @@ public class DateUtils {
         //获取日期
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
 
     }

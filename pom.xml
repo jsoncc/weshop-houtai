@@ -82,7 +82,7 @@
             <version>1.2.76</version>
         </dependency>
 
-        <!-- 图片 -->
+        <!-- 图片缩略图处理 -->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
