@@ -8,25 +8,73 @@
     </select>
 
     <!--分页查询-->
-    <select id="queryOil" parameterType="map" resultType="map">
-        select o.`id`,
+    <select id="queryOil" parameterType="map"  resultMap="oilBean">
+        select
+        o.`id`,
         o.`oil_name`,
         o.`address`,
         o.`longitude`,
         o.`latitude`,
         o.`discount`,
         o.`explains`,
-        date_format(o.`adddate`,'%d %b %Y %T') adddate,
-        o.`status`
-        from b_oil o
+        date_format (o.`adddate`, '%Y-%m-%d %h:%i') adddate,
+        o.`status`,
+        a.id aid,
+        a.`attMiniUrl`,
+        a.`attType`,
+        a.`attUrl`,
+        a.`businessType`,
+        a.`isdefault`,
+        a.`name`,
+        date_format (a.`uploadTime`, '%Y-%m-%d %h:%i') uploadTime
+        from
+        b_oil o
+        left join b_attachment a
+        on o.id = a.businessId
+        and a.businessType = 1
         <where>
-            o.isdel = 0
-            <if test="oil_name != null and oil_name !='' ">
-                and o.oil_name like concat ('%',#{oil_name},'%')
+            o.isdel=0
+            <if test="oil_name !=null and oil_name !='' ">
+                and o.oil_name like concat('%',#{oil_name},'%')
+            </if>
+            <if test="address !=null and address !='' ">
+                and o.address like concat('%',#{address},'%')
+            </if>
+            <if test="status!=null and status!=''">
+                and o.status=#{status}
             </if>
         </where>
-        ORDER BY adddate DESC
+
+        <if test="begin!=null">
+            limit #{begin},#{pageSize}
+        </if>
+
     </select>
+
+    <!--  油站查询的结果  -->
+    <resultMap id="oilBean" type="oil">
+        <id property="id" column="id"></id>
+        <result property="oil_name" column="oil_name"/>
+        <result property="address" column="address"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="discount" column="discount"/>
+        <result property="explains" column="explains"/>
+        <result property="adddate" column="adddate"/>
+        <result property="status" column="status"/>
+        <collection property="attachments" ofType="attachment" >
+            <id property="id" column="aid"></id>
+            <result property="name" column="name"></result>
+            <result property="attType" column="attType"></result>
+            <result property="attUrl" column="attUrl"></result>
+            <result property="attMiniUrl" column="attMiniUrl"></result>
+            <result property="uploadTime" column="uploadTime"></result>
+            <result property="isdefault" column="isdefault"></result>
+            <result property="businessType" column="businessType"/>
+        </collection>
+
+    </resultMap>
+
     <!--查询总记录数-->
     <select id="queryOilCount" parameterType="map" resultType="int">
         select count(1)
@@ -58,19 +106,19 @@
     <!--        where id = #{id}-->
     <!--    </update>-->
 
-    <update id = "updateOil" parameterType = "map">
+    <update id="updateOil" parameterType="map">
         update b_oil
-        <trim prefix = "set" suffixOverrides = ",">
-            <if test = "oil_name != null and oil_name != '' ">
+        <trim prefix="set" suffixOverrides=",">
+            <if test="oil_name != null and oil_name != '' ">
                 oil_name = #{oil_name},
             </if>
-            <if test = "address != null">
+            <if test="address != null">
                 address =# {address},
             </if>
-            <if test = "longitude != null">
+            <if test="longitude != null">
                 longitude = #{longitude},
             </if>
-            <if test = "latitude != null">
+            <if test="latitude != null">
                 latitude = #{latitude},
             </if>
             <if test="discount != null">
@@ -85,5 +133,8 @@
         </trim>
         where id = #{id}
     </update>
+
+
+
 
 </mapper>
