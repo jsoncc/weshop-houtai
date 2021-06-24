@@ -27,7 +27,7 @@ public class OilController extends BaseController {
     @PostMapping("/save")
     public String save(@RequestBody Map map) {
         int rs = oilService.saveOil(map);
-        if (rs == 1) {
+        if (rs > 0) {
             return success("油站添加成功");
         }
         return fail("油站添加失败");

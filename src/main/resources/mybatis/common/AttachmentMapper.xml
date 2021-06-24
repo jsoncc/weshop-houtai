@@ -21,5 +21,21 @@
         </foreach>
     </insert>
 
+    <!-- 根据油站id查询附件 嵌套查询 -->
+    <select id="queryAttachmentByOilId" parameterType="string" resultType="cn.jsoncc.bean.Attachment">
+        select
+            a.`id`,
+            a.`attMiniUrl`,
+            a.`attType`,
+            a.`attUrl`,
+            a.`businessId`,
+            a.`businessType`,
+            a.`isdefault`,
+            a.`name`
+        from
+            b_attachment a
+        where a.businessId=#{oid}
+          and a.businessType=1
+    </select>
 
 </mapper>

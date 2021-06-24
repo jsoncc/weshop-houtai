@@ -7,7 +7,7 @@
         from b_oil;
     </select>
 
-    <!--分页查询-->
+    <!--分页查询 此一对多查询看着复杂，但效率比下面那种方法高些
     <select id="queryOil" parameterType="map"  resultMap="oilBean">
         select
         o.`id`,
@@ -51,7 +51,7 @@
 
     </select>
 
-    <!--  油站查询的结果  -->
+    <! zhushi  油站查询的结果
     <resultMap id="oilBean" type="oil">
         <id property="id" column="id"></id>
         <result property="oil_name" column="oil_name"/>
@@ -74,6 +74,57 @@
         </collection>
 
     </resultMap>
+    -->
+
+    <!-- 嵌套查询 -->
+    <resultMap id="oilBean" type="oil">
+        <id property="id" column="id"></id>
+        <result property="oil_name" column="oil_name"/>
+        <result property="address" column="address"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="discount" column="discount"/>
+        <result property="explains" column="explains"/>
+        <result property="adddate" column="adddate"/>
+        <result property="status" column="status"/>
+        <collection property="attachments" ofType="attachment" column="id"
+                    select="cn.jsoncc.dao.business.AttachmentDao.queryAttachmentByOilId">
+
+        </collection>
+
+    </resultMap>
+
+    <select id="queryOil" parameterType="map" resultMap="oilBean">
+        select
+        o.`id`,
+        o.`oil_name`,
+        o.`address`,
+        o.`longitude`,
+        o.`latitude`,
+        o.`discount`,
+        o.`explains`,
+        date_format (o.`adddate`, '%Y-%m-%d %h:%i') adddate,
+        o.status
+        from
+        b_oil o
+        <where>
+            o.isdel=0
+            <if test="oil_name !=null and oil_name !='' ">
+                and o.oil_name like concat('%',#{oil_name},'%')
+            </if>
+            <if test="address !=null and address !='' ">
+                and o.address like concat('%',#{address},'%')
+            </if>
+            <if test="status!=null and status!=''">
+                and o.status=#{status}
+            </if>
+        </where>
+        order by o.adddate desc
+        <if test="begin!=null">
+            limit #{begin},#{pageSize}
+        </if>
+    </select>
+
 
     <!--查询总记录数-->
     <select id="queryOilCount" parameterType="map" resultType="int">
@@ -133,8 +184,6 @@
         </trim>
         where id = #{id}
     </update>
-
-
 
 
 </mapper>

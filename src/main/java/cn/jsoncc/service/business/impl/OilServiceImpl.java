@@ -8,6 +8,7 @@ import cn.jsoncc.service.business.OilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -43,8 +44,11 @@ public class OilServiceImpl implements OilService {
         int rs = oilDao.saveOil(map);
 
         //批量保存附件
-        rs = attachmentDao.saveBatchAttachment(map);
 
+        List list = (ArrayList)map.get("pics");
+        if (list!=null && list.size()>0){
+            rs =attachmentDao.saveBatchAttachment(map);
+        }
         return rs;
     }
 
