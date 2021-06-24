@@ -16,7 +16,7 @@
         o.`latitude`,
         o.`discount`,
         o.`explains`,
-        o.`adddate`,
+        date_format(o.`adddate`,'%d %b %Y %T') adddate,
         o.`status`
         from b_oil o
         <where>
