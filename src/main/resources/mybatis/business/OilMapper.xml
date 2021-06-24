@@ -25,6 +25,7 @@
                 and o.oil_name like concat ('%',#{oil_name},'%')
             </if>
         </where>
+        ORDER BY adddate DESC
     </select>
     <!--查询总记录数-->
     <select id="queryOilCount" parameterType="map" resultType="int">
