@@ -7,6 +7,7 @@ import cn.jsoncc.dao.business.OilDao;
 import cn.jsoncc.service.business.OilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class OilServiceImpl implements OilService {
     }
 
     @Override
+    @Transactional
     public int saveOil(Map map) {
         //生成油站id
         String oid = UUID.randomUUID().toString();
@@ -52,6 +54,7 @@ public class OilServiceImpl implements OilService {
     }
 
     @Override
+    @Transactional
     public int updateOil(Map map) {
         List list = (ArrayList)map.get("pics");
         int rs = oilDao.updateOil(map);
