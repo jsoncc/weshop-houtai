@@ -1,6 +1,7 @@
 package cn.jsoncc.dao.business;
 
 import cn.jsoncc.bean.Attachment;
+import cn.jsoncc.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
  * Email:896415482@qq.com
  */
 @Mapper
-public interface AttachmentDao {
+public interface AttachmentDao extends BaseDao<Map> {
     //批量保存图片
     public int saveBatchAttachment(Map map);
 
@@ -22,4 +23,7 @@ public interface AttachmentDao {
      * @return
      */
     public List<Attachment> queryAttachmentByOilId(String oid);
+
+
+
 }

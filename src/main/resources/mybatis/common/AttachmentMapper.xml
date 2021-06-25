@@ -38,4 +38,26 @@
           and a.businessType=1
     </select>
 
+    <!--  油站删除图片  -->
+    <delete id="delete" parameterType="string">
+        delete from b_attachment where id = #{id}
+    </delete>
+
+    <!-- 根据id查询附件   -->
+    <select id="get" parameterType="string" resultType="map">
+        select
+            a.`id`,
+            a.`attMiniUrl`,
+            a.`attType`,
+            a.`attUrl`,
+            a.`businessId`,
+            a.`businessType`,
+            a.`isdefault`,
+            a.`name`
+        from
+            b_attachment a
+        where
+            a.id = #{id}
+    </select>
+
 </mapper>

@@ -9,6 +9,10 @@ import com.alibaba.fastjson.JSONObject;
  * Date: 2021/6/16 16:27
  * Email:896415482@qq.com
  */
+/**
+ *  0可以理解为失败
+ *  1可以理解为成功
+ */
 public class BaseController {
     private static final int SUCCESS = 200;
     private static final int FAIL = 0;
