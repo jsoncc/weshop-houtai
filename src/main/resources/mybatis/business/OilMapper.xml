@@ -103,7 +103,7 @@
         o.`latitude`,
         o.`discount`,
         o.`explains`,
-        date_format (o.`adddate`, '%Y-%m-%d %h:%i') adddate,
+        date_format (o.`adddate`, '%Y-%m-%d %H:%i') adddate,
         o.status
         from
         b_oil o

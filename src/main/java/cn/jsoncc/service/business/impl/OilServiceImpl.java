@@ -43,9 +43,8 @@ public class OilServiceImpl implements OilService {
         //保存油站
         int rs = oilDao.saveOil(map);
 
-        //批量保存附件
-
         List list = (ArrayList)map.get("pics");
+        //批量保存附件
         if (list!=null && list.size()>0){
             rs =attachmentDao.saveBatchAttachment(map);
         }
@@ -54,7 +53,13 @@ public class OilServiceImpl implements OilService {
 
     @Override
     public int updateOil(Map map) {
-        return oilDao.updateOil(map);
+        List list = (ArrayList)map.get("pics");
+        int rs = oilDao.updateOil(map);
+        //批量保存附件
+        if (list!=null && list.size()>0){
+            rs =attachmentDao.saveBatchAttachment(map);
+        }
+        return rs;
     }
 
 
