@@ -179,7 +179,10 @@
                 explains = #{explains},
             </if>
             <if test="isdel != null and isdel != '' ">
-                isdel = #{isdel}
+                isdel = #{isdel},
+            </if>
+            <if test="status != null  ">
+                status = #{status}
             </if>
         </trim>
         where id = #{id}
