@@ -13,6 +13,7 @@ import java.util.Map;
  */
 @Mapper
 public interface OilDao {
+    public int updatebalance(Map map);
 
     public int saveOil(Map map);
 
@@ -34,5 +35,7 @@ public interface OilDao {
      * @return
      */
     public int queryOilCount(PageMap pageMap);
+
+
 
 }

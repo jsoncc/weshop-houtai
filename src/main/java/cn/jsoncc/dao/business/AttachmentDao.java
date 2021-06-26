@@ -24,6 +24,4 @@ public interface AttachmentDao extends BaseDao<Map> {
      */
     public List<Attachment> queryAttachmentByOilId(String oid);
 
-
-
 }

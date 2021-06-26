@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.business.OilRecordDao">
+
+    <select id="queryResultByPage" parameterType="map" resultType="map">
+        select
+        r.id,
+        r.`oid`,
+        r.`money`,
+        r.`note`,
+        r.`topupdate`,
+        date_format (r.`adddate`, '%Y-%m-%d %H:%i') adddate,
+        r.`userId`
+        from
+        b_oil_record r
+        where r.oid=#{oid}
+        <if test = "begin!=null and pageSize != null">
+            limit #{begin},#{pageSize}
+        </if>
+        order by r.adddate desc
+    </select>
+
+    <select id="queryCount" parameterType="map" resultType="int">
+        select
+            count(1)
+        from
+            b_oil_record r
+        where r.oid=#{oid}
+    </select>
+
+    <insert id="save" parameterType="map">
+        insert into b_oil_record (
+            id,
+            oid,
+            money,
+            note,
+            topupdate,
+            adddate,
+            userId
+        )
+        values
+        (uuid (),
+         #{oid},#{money},#{note},#{topupdate},now(),#{userId})
+    </insert>
+
+</mapper>

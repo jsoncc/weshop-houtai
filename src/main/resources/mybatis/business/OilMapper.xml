@@ -104,7 +104,8 @@
         o.`discount`,
         o.`explains`,
         date_format (o.`adddate`, '%Y-%m-%d %H:%i') adddate,
-        o.status
+        o.status,
+        o.balance
         from
         b_oil o
         <where>
@@ -189,4 +190,7 @@
     </update>
 
 
+    <update id="updatebalance" parameterType="map">
+        update b_oil set balance=balance+#{money} where id=#{oid}
+    </update>
 </mapper>

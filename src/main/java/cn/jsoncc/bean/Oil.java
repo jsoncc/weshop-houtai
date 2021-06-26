@@ -20,6 +20,7 @@ public class Oil {
     private String discount;
     private String explains;
     private String adddate;
+    private String balance;
 
     private int status;
     private List<Attachment> attachments;
