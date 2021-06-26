@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.DictDao">
+
+    <insert id="save" parameterType="map">
+        insert into s_dict (
+            id,
+            dictcode,
+            dictname,
+            dictvalue,
+            sorts,
+            note,
+            parentId
+        )
+        values
+        (uuid (),
+         #{dictcode},#{dictname},#{dictvalue},#{sorts},#{note},#{parentId})
+    </insert>
+
+    <select id="queryChildDictByParentId" parameterType="string" resultType="map">
+        select
+            d.`id`,
+            d.`dictcode`,
+            d.`dictname`,
+            d.`dictvalue`,
+            d.`sorts`,
+            d.`note`
+        from
+            s_dict  d
+        where d.`isdel`=0
+        and d.parentId=#{pid}
+         order by d.sorts
+    </select>
+
+</mapper>
