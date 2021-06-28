@@ -33,4 +33,30 @@
          order by d.sorts
     </select>
 
+    <update id="update" parameterType="map">
+        update
+            s_dict
+        <trim prefix="set" suffixOverrides=",">
+            <if test="dictname!=null and dictname!=''">
+                dictname=#{dictname},
+            </if>
+            <if test="dictvalue!=null and dictvalue!=''">
+                dictvalue=#{dictvalue},
+            </if>
+            <if test="sorts!=null and sorts!=''">
+                sorts=#{sorts},
+            </if>
+            <if test="note!=null and note!=''">
+                note=#{note},
+            </if>
+            <if test="isdel!=null">
+                isdel=#{isdel},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="deleteByParentId" parameterType="string">
+        update s_dict set isdel = 1 where parentId = #{pid}
+    </update>
 </mapper>

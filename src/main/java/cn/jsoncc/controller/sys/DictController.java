@@ -30,4 +30,22 @@ public class DictController extends BaseController {
         List list=dictService.queryChildDictByParentId(pid);
         return success("字典列表",list);
     }
+
+    @RequestMapping("/update")
+    public String update(@RequestBody Map map){
+        int rs=dictService.update(map);
+        if(rs==1){
+            return success("操作成功");
+        }
+        return fail("操作失败");
+    }
+
+    @RequestMapping("/deletetab")
+    public String deleteDictTabAll(String id){
+        int rs = dictService.deleteDictTabAll(id);
+        if (rs == 1){
+            return success("删除成功");
+        }
+        return fail("删除失败");
+    }
 }

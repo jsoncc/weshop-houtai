@@ -11,5 +11,7 @@ import java.util.Map;
 @Mapper
 public interface DictDao extends BaseDao<Map> {
 
-    public List queryChildDictByParentId(String pid);
+    public List<Map> queryChildDictByParentId(String pid);
+
+    public int deleteByParentId(String pid);
 }
