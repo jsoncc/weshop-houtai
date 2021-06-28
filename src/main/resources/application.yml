@@ -18,7 +18,7 @@ mybatis:
 # 配置日志权限
 logging:
   level:
-    ROOT: off
+    ROOT: info
 
 server:
   port: 8090

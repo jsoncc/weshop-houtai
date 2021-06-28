@@ -6,6 +6,7 @@ import cn.jsoncc.service.business.OilRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -33,7 +34,7 @@ public class OilRecordController extends BaseController {
         return fail("充值失败");
     }
 
-    @RequestMapping("/list")
+    @RequestMapping(value = "/list",method = {RequestMethod.POST})
     public String query(@RequestBody Map map){
         PageBean pageBean = oilRecordService.query(map);
         return success("充值记录列表",pageBean);

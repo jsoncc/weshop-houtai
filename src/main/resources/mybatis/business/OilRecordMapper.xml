@@ -15,10 +15,11 @@
         from
         b_oil_record r
         where r.oid=#{oid}
+        order by r.adddate desc
         <if test = "begin!=null and pageSize != null">
             limit #{begin},#{pageSize}
         </if>
-        order by r.adddate desc
+
     </select>
 
     <select id="queryCount" parameterType="map" resultType="int">
