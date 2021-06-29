@@ -13,4 +13,6 @@ public interface DictService {
     public int deleteDictTabAll(String id);
 
     public int update(Map map);
+
+    public int checkcode(Map map);
 }

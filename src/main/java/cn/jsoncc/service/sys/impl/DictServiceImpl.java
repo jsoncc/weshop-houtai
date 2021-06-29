@@ -45,4 +45,9 @@ public class DictServiceImpl  implements DictService {
     public int update(Map map) {
         return dictDao.update(map);
     }
+
+    @Override
+    public int checkcode(Map map) {
+        return dictDao.queryDictCodeOnly(map);
+    }
 }

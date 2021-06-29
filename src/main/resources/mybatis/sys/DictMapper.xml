@@ -59,4 +59,8 @@
     <update id="deleteByParentId" parameterType="string">
         update s_dict set isdel = 1 where parentId = #{pid}
     </update>
+
+    <select id="queryDictCodeOnly" parameterType="map" resultType="int">
+        select count(1) from s_dict where parentId = #{pid} and dictcode like #{dictcode}
+    </select>
 </mapper>

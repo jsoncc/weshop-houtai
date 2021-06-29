@@ -48,4 +48,13 @@ public class DictController extends BaseController {
         }
         return fail("删除失败");
     }
+
+    @RequestMapping("/checkcode")
+    public String checkcode(@RequestBody Map map){
+        int rs = dictService.checkcode(map);
+        if(rs > 0){
+            return success("no");
+        }
+        return success("yes");
+    }
 }
