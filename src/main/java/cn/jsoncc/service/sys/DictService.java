@@ -14,5 +14,8 @@ public interface DictService {
 
     public int update(Map map);
 
+    // 返回值：-1代表已存在 0表示失败 >0表示成功
     public int checkcode(Map map);
+
+    public List<Map> queryChildDict(String code);
 }

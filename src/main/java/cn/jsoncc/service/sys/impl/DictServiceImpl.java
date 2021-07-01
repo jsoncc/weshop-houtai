@@ -19,6 +19,11 @@ public class DictServiceImpl  implements DictService {
 
     @Override
     public int save(Map map) {
+        //查询字典编码是否存在
+        int count = dictDao.queryDictCodeOnly(map);
+        if (count >0){
+            return -1;
+        }
         return dictDao.save(map);
     }
 
@@ -49,5 +54,11 @@ public class DictServiceImpl  implements DictService {
     @Override
     public int checkcode(Map map) {
         return dictDao.queryDictCodeOnly(map);
+    }
+
+    @Override
+    public List queryChildDict(String code) {
+
+        return dictDao.queryChildDict(code);
     }
 }

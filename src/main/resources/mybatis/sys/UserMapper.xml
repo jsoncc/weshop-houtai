@@ -1,0 +1,77 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.UserDao">
+    <select id="queryResultByPage" parameterType="map" resultType="cn.jsoncc.bean.User">
+        SELECT
+        u.`id`,
+        u.`username`,
+        u.`bid`,
+        u.`email`,
+        u.`name`,
+        u.`status`,
+        u.`usertype`,
+        u.`gender`,
+        DATE_FORMAT (u.`adddate`, '%Y-%m-%d %H:%i') ADDDATE
+        FROM
+        s_user u
+        <trim prefix="where">
+            u.isdel = 0
+            <if test="username!=null and username!=''">
+                and u.username like concat('%',#{username},'%')
+            </if>
+            <if test="name!=null and name!=''">
+                and u.name like concat('%',#{name},'%')
+            </if>
+            <if test="status!=null and status!=''">
+                and u.status like concat('%',#{status},'%')
+            </if>
+            <if test="usertype!=null and usertype!=''">
+                and u.usertype like concat('%',#{usertype},'%')
+            </if>
+        </trim>
+        order by u.adddate desc
+        <if test="begin!=null and pageSize!=null">
+            limit #{begin},#{pageSize}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="map">
+        INSERT INTO s_user
+        (id,
+         username,
+         PASSWORD,
+         NAME,
+         gender,
+         mobile,
+         email,
+         usertype,
+         bid,
+         ADDDATE)
+        VALUES (UUID(), #{username}, md5(#{password}), #{name}, #{gender}, #{mobile}, #{email}, #{usertype}, #{bid},
+                now())
+    </insert>
+
+
+    <select id="queryCount" parameterType="map" resultType="int">
+        SELECT
+        count(1)
+        FROM
+        s_user u
+        <trim prefix="where">
+            u.isdel = 0
+            <if test="username!=null and username!=''">
+                and u.username like concat('%',#{username},'%')
+            </if>
+            <if test="name!=null and name!=''">
+                and u.name like concat('%',#{name},'%')
+            </if>
+            <if test="status!=null and status!=''">
+                and u.status like concat('%',#{status},'%')
+            </if>
+            <if test="usertype!=null and usertype!=''">
+                and u.usertype like concat('%',#{usertype},'%')
+            </if>
+        </trim>
+    </select>
+</mapper>

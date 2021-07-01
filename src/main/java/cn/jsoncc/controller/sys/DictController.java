@@ -21,6 +21,8 @@ public class DictController extends BaseController {
         int rs=dictService.save(map);
         if(rs==1){
             return success("保存成功 ");
+        }else if(rs == -1){
+            return fail("保存失败，编码已存在");
         }
         return fail("保存失败");
     }
@@ -56,5 +58,12 @@ public class DictController extends BaseController {
             return success("no");
         }
         return success("yes");
+    }
+
+    //根据字典写用户类型，供用户管理的用户类型选择
+    @RequestMapping("/childdict")
+    public String queryChildDict(String code){
+        List list = dictService.queryChildDict(code);
+        return success("字典数据：",list);
     }
 }

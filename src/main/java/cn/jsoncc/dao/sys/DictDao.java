@@ -16,4 +16,6 @@ public interface DictDao extends BaseDao<Map> {
     public int deleteByParentId(String pid);
 
     public int queryDictCodeOnly(Map map);
+
+    public List<Map> queryChildDict(String code);
 }

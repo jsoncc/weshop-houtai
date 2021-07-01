@@ -61,6 +61,23 @@
     </update>
 
     <select id="queryDictCodeOnly" parameterType="map" resultType="int">
-        select count(1) from s_dict where parentId = #{pid} and dictcode like #{dictcode}
+        select count(1) from s_dict where parentId = #{parentId} and dictcode like #{dictcode} and isdel = 0
+    </select>
+
+    <select id="queryChildDict" parameterType="string" resultType="map">
+        select
+            d.`dictcode`,
+            d.`dictname`,
+            d.`dictvalue`
+        from
+            s_dict d
+        where d.`parentId` =
+              (select
+                   id
+               from
+                   s_dict
+               where dictcode like #{code} and isdel =0)
+        and d.`isdel` = 0
+        order by d.`sorts`
     </select>
 </mapper>
