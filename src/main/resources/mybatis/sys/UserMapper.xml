@@ -12,6 +12,7 @@
         u.`status`,
         u.`usertype`,
         u.`gender`,
+        u.`mobile`,
         DATE_FORMAT (u.`adddate`, '%Y-%m-%d %H:%i') ADDDATE
         FROM
         s_user u
