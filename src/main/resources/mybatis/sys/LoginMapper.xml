@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.LoginDao">
+
+    <!-- 下面的 u.`usertype` = "1" 里面的值是自定义的-->
+    <select id="queryUserByUserName" parameterType="string" resultType="cn.jsoncc.bean.User" >
+        SELECT
+            u.`id`,
+            u.`username`,
+            u.`password`,
+            u.`name`,
+            u.`status`
+        FROM
+            s_user u
+        WHERE u.`isdel` = 0
+          AND u.`username` = #{username}
+          and u.`usertype` = "1"
+    </select>
+</mapper>

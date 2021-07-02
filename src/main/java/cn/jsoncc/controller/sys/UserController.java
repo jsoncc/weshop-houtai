@@ -27,6 +27,7 @@ public class UserController extends BaseController {
     Userservice userservice;
 
     /*
+
     *   验证有个注解没加在save里 @Validate,后面还有 BindingResult bindingresult
      */
     @RequestMapping("/save")

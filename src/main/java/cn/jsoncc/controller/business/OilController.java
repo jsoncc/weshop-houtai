@@ -40,7 +40,7 @@ public class OilController extends BaseController {
     }
 
     @PostMapping("/update")
-    public String update (@RequestBody Map map){
+    public String update(@RequestBody Map map) {
         int rs = oilService.updateOil(map);
         if (rs == 1) {
             return success("油站修改成功");
@@ -50,15 +50,15 @@ public class OilController extends BaseController {
 
     // 删除
     @RequestMapping("/delete")
-    public String delete(String id){
+    public String delete(String id) {
         Map map = new HashMap();
-        map.put("id",id);
-            map.put("isdel",1);
-            int rs = oilService.updateOil(map);
-            if (rs == 1) {
-                return success("油站删除成功");
-            }
-            return fail("油站删除失败");
+        map.put("id", id);
+        map.put("isdel", 1);
+        int rs = oilService.updateOil(map);
+        if (rs == 1) {
+            return success("油站删除成功");
+        }
+        return fail("油站删除失败");
     }
 
 
