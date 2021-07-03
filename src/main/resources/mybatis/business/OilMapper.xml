@@ -194,3 +194,8 @@
         update b_oil set balance=balance+#{money} where id=#{oid}
     </update>
 </mapper>
+
+
+
+
+
