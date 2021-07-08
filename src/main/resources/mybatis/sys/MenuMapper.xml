@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.MenuDao">
+
+    <insert id="save" parameterType="cn.jsoncc.bean.Menu">
+        INSERT INTO s_menu (
+            id,
+            menuname,
+            icon,
+            menutype,
+            sorts,
+            routepath,
+            authorization,
+            parentId
+        )
+        VALUES
+        (UUID(),#{menuname},#{icon},#{menutype},#{sorts},#{routepath},#{authorization},#{parentId});
+    </insert>
+
+    <!--查询菜单内容-->
+    <select id="queryMenuByParentId" parameterType="string" resultType="map">
+        SELECT
+            m.id,
+            m.menuname,
+            m.icon,
+            m.menutype,
+            m.sorts,
+            m.routepath,
+            m.authorization,
+            m.parentId,
+            (select count(1) from s_menu where parentId=m.id and isdel=0)  childCound
+
+        FROM
+            s_menu m
+        WHERE
+            m.isdel = 0
+          AND m.parentId = #{pid}
+        order by sorts
+    </select>
+
+    <!--映射-->
+    <!--一对多嵌套查询-->
+    <resultMap id="treeMenuMap" type="cn.jsoncc.bean.TreeMenu">
+        <id column="id" property="id"></id>
+        <result column="menuname" property="menuname"></result>
+        <collection property="children" ofType="cn.jsoncc.bean.TreeMenu">
+            <id column="cid" property="id"></id>
+            <result property="menuname" column="cmenuname"></result>
+            <collection property="children" ofType="cn.jsoncc.bean.TreeMenu">
+                <id property="id" column="ccid"></id>
+                <result property="menuname" column="ccmenuname"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!--查询菜单树-->
+    <select id="queryMenuTree" resultMap="treeMenuMap">
+        SELECT
+            m.id,
+            m.menuname,
+            mm.id cid,
+            mm.menuname cmenuname,
+            mmm.id ccid,
+            mmm.menuname ccmenuname
+        FROM
+            s_menu m
+
+                LEFT JOIN s_menu mm ON m.id = mm.parentId
+                AND mm.isdel = 0
+                LEFT JOIN s_menu mmm ON mm.id = mmm.parentId and mmm.isdel=0
+        WHERE
+            m.isdel = 0
+          AND m.parentId = '0'
+        ORDER BY
+            m.sorts
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.RoleMenuDao">
+    <insert id="saveBatchRoleMenu" parameterType="map">
+        INSERT INTO s_role_menu ( id, roleid, menuid )
+        VALUES
+        <foreach collection = "auths" item = "mid" separator = "," >
+            (UUID(),#{id},#{mid})
+        </foreach>
+    </insert>
+
+</mapper>

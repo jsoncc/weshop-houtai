@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.sys.RoleDao">
+
+    <insert id="save" parameterType="map">
+        INSERT INTO s_role ( id, role_name, note, adddate )
+        VALUES
+        (
+            #{id},#{role_name},#{note},NOW()
+        )
+    </insert>
+
+
+</mapper>

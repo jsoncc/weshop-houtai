@@ -24,7 +24,7 @@
             <if test="name!=null and name!=''">
                 and u.name like concat('%',#{name},'%')
             </if>
-            <if test="status!=null and status!=''">
+            <if test="status!=null ">
                 and u.status like concat('%',#{status},'%')
             </if>
             <if test="usertype!=null and usertype!=''">
