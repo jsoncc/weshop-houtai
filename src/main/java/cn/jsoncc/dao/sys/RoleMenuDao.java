@@ -12,4 +12,6 @@ import java.util.Map;
 @Mapper
 public interface RoleMenuDao {
     public int saveBatchRoleMenu(Map map);
+
+
 }

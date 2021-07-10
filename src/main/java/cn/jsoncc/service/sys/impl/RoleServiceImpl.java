@@ -55,4 +55,10 @@ public class RoleServiceImpl implements RoleService {
 
         return 0;
     }
+
+    //查询角色列表信息
+    @Override
+    public List<Map> queryRole() {
+        return roleDao.queryRole();
+    }
 }

@@ -1,5 +1,6 @@
 package cn.jsoncc.dao.business;
 
+import cn.jsoncc.bean.OilOrder;
 import cn.jsoncc.common.bean.PageMap;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +14,11 @@ import java.util.Map;
  */
 @Mapper
 public interface OilDao {
+    /**
+     * 修改充值的
+     * @param map
+     * @return
+     */
     public int updatebalance(Map map);
 
     public int saveOil(Map map);
@@ -36,6 +42,17 @@ public interface OilDao {
      */
     public int queryOilCount(PageMap pageMap);
 
+    /**
+     * 查询油站油卡余额
+     * @param id
+     * @return
+     */
+    public double queryOilOrderBalance(String id);
 
-
+    /**
+     * 更新油站油卡余额
+     * @param oilOrder
+     * @return
+     */
+    public int updateOilOrderBalance(OilOrder oilOrder);
 }

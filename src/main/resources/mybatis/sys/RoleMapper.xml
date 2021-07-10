@@ -11,5 +11,18 @@
         )
     </insert>
 
+    <select id="queryRole" resultType="map">
+        SELECT
+            r.id,
+            r.role_name,
+            r.note,
+            DATE_FORMAT( r.adddate, '%Y-%m-%d %H:%i' ) adddate
+        FROM
+            s_role r
+        WHERE
+            r.isdel = 0
+        ORDER BY
+            r.adddate DESC
 
+    </select>
 </mapper>

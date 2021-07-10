@@ -3,11 +3,9 @@ package cn.jsoncc.controller.sys;
 import cn.jsoncc.controller.common.BaseController;
 import cn.jsoncc.service.sys.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,5 +27,12 @@ public class RoleController extends BaseController {
             return success("保存成功");
         }
         return fail("保存失败");
+    }
+
+    //查询角色表
+    @GetMapping("/list")
+    public String queryRole(){
+        List list = roleService.queryRole();
+        return success("角色列表",list);
     }
 }

@@ -3,6 +3,7 @@ package cn.jsoncc.dao.sys;
 import cn.jsoncc.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +17,6 @@ import java.util.Map;
  */
 @Mapper
 public interface RoleDao extends BaseDao<Map> {
+    //查询角色
+    public List<Map> queryRole();
 }

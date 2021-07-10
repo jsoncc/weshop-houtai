@@ -193,6 +193,14 @@
     <update id="updatebalance" parameterType="map">
         update b_oil set balance=balance+#{money} where id=#{oid}
     </update>
+
+    <select id="queryOilOrderBalance" parameterType="string" resultType="double">
+        select o.balance from b_oil o where o.id=#{id}
+    </select>
+
+    <update id="updateOilOrderBalance" parameterType="cn.jsoncc.bean.OilOrder">
+        UPDATE b_oil o set o.balance=o.balance-#{payment} where o.id=#{oilid}
+    </update>
 </mapper>
 
 

@@ -1,5 +1,6 @@
 package cn.jsoncc.service.sys;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -9,4 +10,6 @@ import java.util.Map;
  */
 public interface RoleService {
     public int save(Map map);
+
+    public List<Map> queryRole();
 }
