@@ -35,4 +35,10 @@ public class UserServiceImpl implements Userservice {
         PageBean pageBean = new PageBean(pageMap.getPage(), pageMap.getPageSize(), total, list);
         return pageBean;
     }
+
+    @Override
+    public List<User> queryAll() {
+        List<User> users = userDao.queryAll();
+        return users;
+    }
 }

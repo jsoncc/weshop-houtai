@@ -75,4 +75,25 @@
             </if>
         </trim>
     </select>
+
+    <!--查询全部用户-->
+    <select id="queryAll" parameterType="string" resultType="cn.jsoncc.bean.User">
+        select
+            u.`id`,
+            u.`username`,
+            u.`password`,
+            u.`name`,
+            u.`status`,
+            u.`bid`,
+            u.`email`,
+            u.`name`,
+            u.`status`,
+            u.`usertype`,
+            u.`gender`,
+            u.`mobile`,
+            DATE_FORMAT (u.`adddate`, '%Y-%m-%d %H:%i') ADDDATE
+
+        from
+            s_user u
+    </select>
 </mapper>

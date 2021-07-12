@@ -4,6 +4,8 @@ import cn.jsoncc.bean.User;
 import cn.jsoncc.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Author: JsonCC
  * Date: 2021/6/30 12:36
@@ -11,4 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserDao extends BaseDao<User> {
+    public List<User> queryAll();
 }
