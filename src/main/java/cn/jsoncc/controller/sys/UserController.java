@@ -130,6 +130,7 @@ public class UserController extends BaseController {
                         user.setName(dto.getName());
                         user.setEmail(dto.getEmail());
                         user.setPassword(dto.getPassword());
+                        user.setAdddate(dto.getAdddate());
                         String gender = dto.getGender();
                         if (gender.equals("男")){
                             user.setGender(1);

@@ -24,11 +24,15 @@ public class UserDTO extends BaseRowModel {
     @ExcelProperty(value = "密码", index = 3)
     private String password;
 
-    @ExcelProperty(value = "性别", index = 4)
+    @ExcelProperty(value = "创建日期", index = 4)
+    private String adddate;
+
+    @ExcelProperty(value = "性别", index = 5)
     private String gender;
 
-    @ExcelProperty(value = "状态", index = 5)
+    @ExcelProperty(value = "状态", index = 6)
     private int status;
+
 
 
 }
