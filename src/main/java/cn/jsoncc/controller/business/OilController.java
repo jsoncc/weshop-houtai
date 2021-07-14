@@ -33,7 +33,7 @@ public class OilController extends BaseController {
         return fail("油站添加失败");
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     public String query(@RequestBody Map map) {
         PageBean pageBean = oilService.queryOil(map);
         return success("油站列表", pageBean);

@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.business.GoodsDao">
+    <insert id="saveGoods" parameterType="map">
+        INSERT INTO b_goods ( id, goodsname, cid, unit, normal_price, cf_price, nums, note, `desc` )
+        VALUES
+        (#{id},#{goodsname},#{cid},#{unit},#{normal_price},#{cf_price},#{nums},#{note},#{desc})
+    </insert>
+
+    <select id="queryGoods" resultType="cn.jsoncc.bean.Goods" parameterType="string">
+        SELECT
+            g.id,
+            g.goodsname,
+            g.cid,
+            g.unit,
+            g.normal_price,
+            g.cf_price,
+            g.nums,
+            g.note,
+            g.`desc`,
+            g.`status`
+        FROM
+            b_goods g
+        WHERE
+            g.isdel = 0
+    </select>
+</mapper>
