@@ -117,7 +117,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @ApiOperation("导入(固定格式：名字;email;密码;性别(男或女);)")
+    @ApiOperation("导入(固定格式：名字;email;密码;创建日期;性别(男或女);)")
     @RequestMapping(value = "/getByDeptIdImport", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void getByDeptIdImport(@RequestParam("uploadFile") MultipartFile file) {
         try {

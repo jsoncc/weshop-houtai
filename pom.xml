@@ -126,6 +126,14 @@
         </dependency>
         <!-- 导入/导出 文档部分 end -->
 
+        <!--token-->
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.18.1</version>
+        </dependency>
+
 
     </dependencies>
 
