@@ -13,7 +13,10 @@ import java.util.Map;
  */
 public interface Userservice {
     public int save(User user);
+
+    //分页查询-仅是分页
     public PageBean query(Map map);
 
+    //查询所有用户
     public List<User> queryAll();
 }

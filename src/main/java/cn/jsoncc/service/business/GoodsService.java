@@ -1,7 +1,9 @@
 package cn.jsoncc.service.business;
 
+import cn.jsoncc.bean.Goods;
 import cn.jsoncc.common.bean.PageBean;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,8 +12,11 @@ import java.util.Map;
  * Email:896415482@qq.com
  */
 public interface GoodsService {
+    //分页查询-仅是分页
+    public PageBean query(Map map);
+
     //查询商品列表
-    public PageBean queryGoods(Map map);
+    public List<Goods> queryGoods();
 
     //添加保存商品信息
     public int saveGoods(Map map);

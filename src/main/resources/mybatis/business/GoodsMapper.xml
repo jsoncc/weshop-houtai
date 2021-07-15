@@ -8,6 +8,72 @@
         (#{id},#{goodsname},#{cid},#{unit},#{normal_price},#{cf_price},#{nums},#{note},#{desc})
     </insert>
 
+    <!--需要分页的页面-查询-->
+    <select id="queryResultByPage" parameterType="map" resultType="cn.jsoncc.bean.Goods">
+        SELECT
+            g.id,
+            g.goodsname,
+            g.cid,
+            g.unit,
+            g.normal_price,
+            g.cf_price,
+            g.nums,
+            g.note,
+            g.`desc`,
+            g.`status`
+        FROM
+            b_goods g
+        <trim prefix="where">
+            g.isdel = 0
+            <if test="goodsname!=null and goodsname!=''">
+                and g.goodsname like concat('%',#{goodsname},'%')
+            </if>
+            <if test="cid!=null and cid!=''">
+                and g.cid like concat('%',#{cid},'%')
+            </if>
+            <if test="status!=null ">
+                and g.status like concat('%',#{status},'%')
+            </if>
+        </trim>
+        <if test="begin!=null and pageSize!=null">
+            limit #{begin},#{pageSize}
+        </if>
+    </select>
+
+<!--    <select id="queryCount" parameterType="map" resultType="int">-->
+<!--        SELECT-->
+<!--        count(1)-->
+<!--        FROM-->
+<!--        s_user u-->
+<!--        <trim prefix="where">-->
+<!--            u.isdel = 0-->
+<!--            <if test="username!=null and username!=''">-->
+<!--                and u.username like concat('%',#{username},'%')-->
+<!--            </if>-->
+<!--            <if test="name!=null and name!=''">-->
+<!--                and u.name like concat('%',#{name},'%')-->
+<!--            </if>-->
+<!--            <if test="status!=null and status!=''">-->
+<!--                and u.status like concat('%',#{status},'%')-->
+<!--            </if>-->
+<!--            <if test="usertype!=null and usertype!=''">-->
+<!--                and u.usertype like concat('%',#{usertype},'%')-->
+<!--            </if>-->
+<!--        </trim>-->
+<!--    </select>-->
+
+    <!--需要分页的页面-查询总记录数-->
+    <select id="queryCount" parameterType="map" resultType="int">
+        select count(1)
+        from b_goods g
+        <where>
+            g.isdel = 0
+            <if test="goodsname != null and goodsname !='' ">
+                and g.goodsname like concat ('%',#{goodsname},'%')
+            </if>
+        </where>
+    </select>
+
     <select id="queryGoods" resultType="cn.jsoncc.bean.Goods" parameterType="string">
         SELECT
             g.id,
@@ -24,5 +90,45 @@
             b_goods g
         WHERE
             g.isdel = 0
+        <if test="begin!=null">
+            limit #{begin},#{pageSize}
+        </if>
     </select>
+
+    <update id="updateGoods" parameterType="map">
+        update b_goods
+        <trim prefix="set" suffixOverrides=",">
+            <if test="goodsname != null and goodsname != '' ">
+                goodsname = #{goodsname},
+            </if>
+            <if test="cid != null">
+                cid =# {cid},
+            </if>
+            <if test="unit != null">
+                unit = #{unit},
+            </if>
+            <if test="normal_price != null">
+                normal_price = #{normal_price},
+            </if>
+            <if test="cf_price != null">
+                cf_price = #{cf_price},
+            </if>
+            <if test="nums != null">
+                nums = #{nums},
+            </if>
+            <if test="note != null">
+                note = #{note},
+            </if>
+            <if test="desc != null">
+                desc = #{desc},
+            </if>
+            <if test="isdel != null and isdel != '' ">
+                isdel = #{isdel},
+            </if>
+            <if test="status != null  ">
+                status = #{status}
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
 </mapper>
