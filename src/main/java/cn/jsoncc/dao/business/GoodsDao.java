@@ -21,4 +21,6 @@ public interface GoodsDao extends BaseDao<Goods> {
     //查询分页之后的结果集，显示商品列表
     public List<Goods> queryGoods();
 
+    //修改商品
+    public int updateGoods(Goods goods);
 }

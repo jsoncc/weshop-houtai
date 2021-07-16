@@ -20,4 +20,7 @@ public interface GoodsService {
 
     //添加保存商品信息
     public int saveGoods(Map map);
+
+    //修改商品
+    public int updateGoods(Goods goods);
 }

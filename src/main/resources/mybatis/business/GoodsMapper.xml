@@ -101,31 +101,31 @@
             <if test="goodsname != null and goodsname != '' ">
                 goodsname = #{goodsname},
             </if>
-            <if test="cid != null">
-                cid =# {cid},
+            <if test="cid != null and cid != ''">
+                cid = #{cid},
             </if>
-            <if test="unit != null">
+            <if test="unit != null and unit != ''">
                 unit = #{unit},
             </if>
-            <if test="normal_price != null">
+            <if test="normal_price != null and normal_price != ''">
                 normal_price = #{normal_price},
             </if>
-            <if test="cf_price != null">
+            <if test="cf_price != null and cf_price != ''">
                 cf_price = #{cf_price},
             </if>
-            <if test="nums != null">
+            <if test="nums != null and nums != ''">
                 nums = #{nums},
             </if>
-            <if test="note != null">
+            <if test="note != null and note != ''">
                 note = #{note},
             </if>
-            <if test="desc != null">
+            <if test="desc != null and desc != ''">
                 desc = #{desc},
             </if>
             <if test="isdel != null and isdel != '' ">
                 isdel = #{isdel},
             </if>
-            <if test="status != null  ">
+            <if test="status != null and status !='' ">
                 status = #{status}
             </if>
         </trim>

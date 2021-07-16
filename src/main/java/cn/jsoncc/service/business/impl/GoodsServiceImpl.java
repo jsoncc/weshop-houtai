@@ -51,4 +51,9 @@ public class GoodsServiceImpl implements GoodsService {
         int rs = goodsDao.saveGoods(map);
         return rs;
     }
+
+    @Override
+    public int updateGoods(Goods goods) {
+        return goodsDao.updateGoods(goods);
+    }
 }
