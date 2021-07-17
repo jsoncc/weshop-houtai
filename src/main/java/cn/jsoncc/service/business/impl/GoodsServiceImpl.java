@@ -19,7 +19,7 @@ import java.util.UUID;
  * Date: 2021/7/14 14:43
  * Email:896415482@qq.com
  */
-@Service("GoodsService")
+@Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 
     @Autowired

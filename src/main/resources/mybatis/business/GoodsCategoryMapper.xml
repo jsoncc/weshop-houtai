@@ -1,0 +1,64 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jsoncc.dao.business.GoodsCategoryDao">
+    <!--添加商品分类-->
+    <insert id="save" parameterType="map">
+        <!--/*INSERT INTO b_goodscategory ( id, categoryname, parentId )
+        VALUES
+            (UUID(),#{categoryname},#{parentId})*/
+
+        /*INSERT INTO b_goodscategory ( id, categoryname, parentId )
+        VALUES
+        ( UUID(), #{categoryname},
+          SELECT id FROM b_goods )*/-->
+        <!--
+        INSERT INTO b_goodscategory (parentId)
+        SELECT id FROM b_goods-->
+
+        <!--
+        INSERT INTO b_goodscategory ( id, categoryname, parentId )
+        SELECT(
+               UUID(), #{categoryname},
+               #{SELECT id FROM b_goods} )
+        FROM b_goods-->
+
+        INSERT INTO b_goodscategory ( id, categorycode, categoryname, parentId )
+        VALUES
+        (UUID(),#{categorycode},#{categoryname},#{parentId})
+    </insert>
+
+    <select id="queryChildGoodsCategoryByParentId" parameterType="string" resultType="map">
+        SELECT
+            gc.id,
+            gc.categorycode,
+            gc.categoryname,
+            gc.parentId
+        FROM
+            b_goodscategory gc
+        WHERE
+            gc.isdel = 0
+          AND gc.parentId = #{pid}
+    </select>
+
+    <select id="queryChildGoodsCategory" parameterType="string" resultType="map">
+        SELECT
+            gc.categorycode,
+            gc.categoryname
+        FROM
+            b_goodscategory gc
+        WHERE
+            gc.parentId = (
+                SELECT
+                    id
+                FROM
+                    b_goodscategory
+                WHERE
+                    categorycode LIKE #{categorycode} and isdel = 0)
+          AND gc.isdel = 0
+    </select>
+
+    <select id="queryCategoryCodeOnly" parameterType="map" resultType="int">
+        select count(1) from b_goodscategory where parentId = #{parentId} and categorycode like #{categorycode} and isdel = 0
+    </select>
+</mapper>

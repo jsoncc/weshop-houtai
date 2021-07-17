@@ -131,4 +131,29 @@
         </trim>
         where id = #{id}
     </update>
+
+<!--    &lt;!&ndash;夏姬霸写的内连接查询&ndash;&gt;
+    <select id="queryGoodsCategory" >
+        SELECT
+            g.cid
+        FROM
+            b_goods g
+        INNER JOIN
+            b_goodscategory gc
+        ON
+            g.id = gc.parentId
+        WHERE
+            gc.isdel = 0
+    </select>
+    &lt;!&ndash;也是夏姬霸写的内连接查询&ndash;&gt;
+    <select id="queryGoodsCategory" resultType="cn.jsoncc.bean.GoodsCategory" parameterType="string">
+        SELECT
+            gc.categoryname
+        FROM
+            b_goodscategory gc
+                INNER JOIN b_goods g ON g.id = gc.parentId
+        WHERE
+            gc.isdel = 0
+    </select>-->
+
 </mapper>

@@ -18,9 +18,9 @@ public class DictController extends BaseController {
 
     @PostMapping("/save")
     public String save(@RequestBody Map map){
-        int rs=dictService.save(map);
-        if(rs==1){
-            return success("保存成功 ");
+        int rs = dictService.save(map);
+        if(rs == 1){
+            return success("保存成功");
         }else if(rs == -1){
             return fail("保存失败，编码已存在");
         }
@@ -33,7 +33,7 @@ public class DictController extends BaseController {
         return success("字典列表",list);
     }
 
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public String update(@RequestBody Map map){
         int rs=dictService.update(map);
         if(rs==1){
@@ -42,7 +42,7 @@ public class DictController extends BaseController {
         return fail("操作失败");
     }
 
-    @RequestMapping("/deletetab")
+    @GetMapping("/deletetab")
     public String deleteDictTabAll(String id){
         int rs = dictService.deleteDictTabAll(id);
         if (rs == 1){
@@ -51,7 +51,7 @@ public class DictController extends BaseController {
         return fail("删除失败");
     }
 
-    @RequestMapping("/checkcode")
+    @PostMapping("/checkcode")
     public String checkcode(@RequestBody Map map){
         int rs = dictService.checkcode(map);
         if(rs > 0){
@@ -61,7 +61,7 @@ public class DictController extends BaseController {
     }
 
     //根据字典写用户类型，供用户管理的用户类型选择
-    @RequestMapping("/childdict")
+    @GetMapping("/childdict")
     public String queryChildDict(String code){
         List list = dictService.queryChildDict(code);
         return success("字典数据：",list);

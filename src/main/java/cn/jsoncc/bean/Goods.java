@@ -27,4 +27,5 @@ public class Goods {
     private int isdel;
     private int status;
 
+
 }

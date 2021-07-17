@@ -28,6 +28,7 @@ public class GoodsController extends BaseController {
 
     // 添加
     //添加商品缺少唯一性验证 validate 目的是添加商品时不添加重复的
+    //          已经添加了，但是没姬霸用
     @PostMapping("/save")
     @ApiOperation(value = "添加商品({\n" +
             "\"goodsname\": \"小米电视\",\n" +
